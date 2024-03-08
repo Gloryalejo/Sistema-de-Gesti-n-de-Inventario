@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('inventory_logs', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('inventory_id')->unsigned();
+            $table->foreign('inventory_id')->references('id')->on('inventories')->onUpdate('cascade'); // new foreign key constraint
             $table->timestamps();
         });
     }
