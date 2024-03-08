@@ -12,9 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('functions', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->timestamps();
+            $table->id(); //Clave primaria única para cada función en la tabla
+            $table->string('name'); //Almacena el nombre de cada función
+            $table->timestamps();//Marcas de tiempo para rastrear la fecha de creación y última actualización
         });
     }
 

@@ -12,12 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('product_supplier', function (Blueprint $table) {
-            $table->id();
+            $table->id();//Clave primaria única para cada tipo de módulo en la tabla
             $table->bigInteger('product_id')->unsigned();
-            $table->foreign('product_id')->references('id')->on('products')->onUpdate('cascade'); // new foreign key constraint
+            $table->foreign('product_id')->references('id')->on('products')->onUpdate('cascade'); //Nueva restricción de clave foránea para 'product_id'
             $table->bigInteger('supplier_id')->unsigned();
-            $table->foreign('supplier_id')->references('id')->on('suppliers')->onUpdate('cascade'); // new foreign key constraint
-            $table->timestamps();
+            $table->foreign('supplier_id')->references('id')->on('suppliers')->onUpdate('cascade'); //Nueva restricción de clave foránea para 'supplier_id'
+            $table->timestamps();//Marcas de tiempo para rastrear la fecha de creación y última actualización
         });
     }
 

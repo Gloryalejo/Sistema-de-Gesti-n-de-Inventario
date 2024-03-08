@@ -12,9 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('categories', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->timestamps();
+            $table->id();//Clave primaria única para cada categoría en la tabla..
+            $table->string('name');//Guarda el nombre de cada categoría de producto..
+            $table->timestamps();// Marcas de tiempo para rastrear la fecha de creación y última actualización
         });
     }
 

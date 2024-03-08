@@ -12,9 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('inventories', function (Blueprint $table) {
-            $table->id();
-            $table->integer('amount');
-            $table->timestamps();
+            $table->id();//Clave primaria única para cada fila de la tabla
+            $table->integer('amount');//Almacena la cantidad disponible de cada producto
+            $table->timestamps();//Marcas de tiempo para rastrear la fecha de creación y última actualización
         });
     }
 

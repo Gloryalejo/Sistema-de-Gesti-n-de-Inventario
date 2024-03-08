@@ -13,11 +13,11 @@ return new class extends Migration
     {
         //Tabla de proveedores
         Schema::create('suppliers', function (Blueprint $table) {
-            $table->id(); // Identificador único de proveedor
-            $table->string('name'); // Nombre del proveedor
-            $table->string('address');// Dirección física del proveedor
-            $table->string('phone');// Número de teléfono del proveedor
-            $table->timestamps();
+            $table->id(); //Identificador único de proveedor
+            $table->string('name'); //Nombre del proveedor
+            $table->string('address');//Dirección física del proveedor
+            $table->string('phone');//Número de teléfono del proveedor
+            $table->timestamps();//Marcas de tiempo para rastrear la fecha de creación y última actualización
         });
     }
 

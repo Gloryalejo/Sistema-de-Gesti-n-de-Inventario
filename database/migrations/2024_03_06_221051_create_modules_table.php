@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('name');// Nombre del módulo
             $table->bigInteger('parent_id')->unsigned();// Identificador del módulo padre, opcionalmente utilizado cuando un módulo es hijo de otro.
             $table->foreign('parent_id')->references('id')->on('modules')->onUpdate('cascade'); // Constraint de la llave foránea parent_id
-            $table->timestamps();
+            $table->timestamps();//Marcas de tiempo para rastrear la fecha de creación y última actualización
         });
     }
 
