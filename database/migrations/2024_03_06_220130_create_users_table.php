@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('last_name');
             $table->bigInteger('role_id')->unsigned();
+            $table->foreign('role_id')->references('id')->on('roles')->onUpdate('cascade'); // new foreign key constraint
             $table->string('email')->unique();
             $table->string('password');
             $table->timestamps();

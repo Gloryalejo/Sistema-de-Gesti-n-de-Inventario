@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('permission_id')->unsigned();
             $table->bigInteger('role_id')->unsigned();
+            $table->foreign('role_id')->references('id')->on('roles')->onUpdate('cascade'); // new foreign key constraint
             $table->timestamps();
         });
     }

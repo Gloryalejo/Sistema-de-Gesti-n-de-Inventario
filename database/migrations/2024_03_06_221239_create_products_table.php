@@ -18,6 +18,7 @@ return new class extends Migration
             $table->decimal('base_price', 8, 2);
             $table->decimal('base_cost', 8, 2);
             $table->bigInteger('category_id')->unsigned();
+            $table->foreign('category_id')->references('id')->on('categories')->onUpdate('cascade'); // new foreign key constraint
             $table->timestamps();
         });
     }

@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->bigInteger('parent_id')->unsigned();
+            $table->foreign('parent_id')->references('id')->on('modules')->onUpdate('cascade'); // new foreign key constraint
             $table->timestamps();
         });
     }

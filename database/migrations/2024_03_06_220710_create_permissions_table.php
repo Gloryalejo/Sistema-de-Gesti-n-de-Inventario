@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('permissions', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('module_id')->unsigned();
+            $table->foreign('module_id')->references('id')->on('modules')->onUpdate('cascade'); // new foreign key constraint
             $table->bigInteger('function_id')->unsigned();
             $table->timestamps();
         });

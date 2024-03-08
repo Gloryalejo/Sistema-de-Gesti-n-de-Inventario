@@ -14,7 +14,9 @@ return new class extends Migration
         Schema::create('product_supplier', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('product_id')->unsigned();
+            $table->foreign('product_id')->references('id')->on('products')->onUpdate('cascade'); // new foreign key constraint
             $table->bigInteger('supplier_id')->unsigned();
+            $table->foreign('supplier_id')->references('id')->on('suppliers')->onUpdate('cascade'); // new foreign key constraint
             $table->timestamps();
         });
     }
