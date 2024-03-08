@@ -11,11 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
+        //Tabla que almacena los módulos
         Schema::create('modules', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->bigInteger('parent_id')->unsigned();
-            $table->foreign('parent_id')->references('id')->on('modules')->onUpdate('cascade'); // new foreign key constraint
+            $table->id();// Identificador único
+            $table->string('name');// Nombre del módulo
+            $table->bigInteger('parent_id')->unsigned();// Identificador del módulo padre, opcionalmente utilizado cuando un módulo es hijo de otro.
+            $table->foreign('parent_id')->references('id')->on('modules')->onUpdate('cascade'); // Constraint de la llave foránea parent_id
             $table->timestamps();
         });
     }

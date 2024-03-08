@@ -11,11 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
+        //Tabla que almacena los permisos y las capacidades del usuario según el id original
         Schema::create('permissions', function (Blueprint $table) {
-            $table->id();
-            $table->bigInteger('module_id')->unsigned();
-            $table->foreign('module_id')->references('id')->on('modules')->onUpdate('cascade'); // new foreign key constraint
-            $table->bigInteger('function_id')->unsigned();
+            $table->id();// Identificador único
+            $table->bigInteger('module_id')->unsigned();// Clave foránea en "modules" para relacionar y cargar información de permisos con módulos.
+            $table->foreign('module_id')->references('id')->on('modules')->onUpdate('cascade'); // Constraint de la llave foránea module_id
+            $table->bigInteger('function_id')->unsigned();// Clave foránea en "functions" para relacionar información de permisos con funciones.
             $table->timestamps();
         });
     }

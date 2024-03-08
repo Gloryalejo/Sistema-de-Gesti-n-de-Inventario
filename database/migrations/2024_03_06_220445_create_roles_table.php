@@ -11,9 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
+        //Tabla de registro de roles sin detalles de permisos ni capacidades.
         Schema::create('roles', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
+            $table->id();// Identificador único del rol
+            $table->string('name');// Nombre del rol
             $table->timestamps();
         });
     }
