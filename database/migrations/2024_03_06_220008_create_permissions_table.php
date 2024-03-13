@@ -17,6 +17,7 @@ return new class extends Migration
             $table->bigInteger('module_id')->unsigned();// Clave foránea en "modules" para relacionar y cargar información de permisos con módulos.
             $table->foreign('module_id')->references('id')->on('modules')->onUpdate('cascade'); // Constraint de la llave foránea module_id
             $table->bigInteger('function_id')->unsigned();// Clave foránea en "functions" para relacionar información de permisos con funciones.
+            $table->foreign('function_id')->references('id')->on('functions')->onUpdate('cascade'); // Constraint de la llave foránea module_id
             $table->timestamps();
         });
     }

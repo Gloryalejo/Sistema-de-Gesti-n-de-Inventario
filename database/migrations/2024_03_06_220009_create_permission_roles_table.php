@@ -14,7 +14,8 @@ return new class extends Migration
         //Tabla que almacena los permisos según sus roles.
         Schema::create('permission_role', function (Blueprint $table) {
             $table->id();// Identificador único del rol
-            $table->bigInteger('permission_id')->unsigned();// Clave foránea en "permissions" para relacionar y cargar información.
+            $table->bigInteger('permission_id')->unsigned();
+            $table->foreign('permission_id')->references('id')->on('permissions')->onUpdate('cascade'); // Clave foránea en "permissions" para relacionar y cargar información.
             $table->bigInteger('role_id')->unsigned();// Clave foránea en "roles" para relacionar información.
             $table->foreign('role_id')->references('id')->on('roles')->onUpdate('cascade'); // Constraint de la llave foránea role_id
             $table->timestamps();
