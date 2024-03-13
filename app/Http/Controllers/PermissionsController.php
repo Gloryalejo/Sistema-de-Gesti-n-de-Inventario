@@ -11,7 +11,7 @@ class PermissionsController extends Controller
      */
     public function index()
     {
-        //
+        return '555';
     }
 
     /**

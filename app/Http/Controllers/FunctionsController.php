@@ -11,7 +11,7 @@ class FunctionsController extends Controller
      */
     public function index()
     {
-        //
+        return '344';
     }
 
     /**

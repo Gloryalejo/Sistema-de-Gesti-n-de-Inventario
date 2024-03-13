@@ -11,7 +11,7 @@ class InventoryLogsController extends Controller
      */
     public function index()
     {
-        //
+        return '444';
     }
 
     /**

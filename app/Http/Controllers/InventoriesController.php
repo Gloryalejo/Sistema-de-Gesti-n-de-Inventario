@@ -11,7 +11,7 @@ class InventoriesController extends Controller
      */
     public function index()
     {
-        //
+        return '333';
     }
 
     /**

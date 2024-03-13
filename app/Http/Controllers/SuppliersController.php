@@ -11,7 +11,7 @@ class SuppliersController extends Controller
      */
     public function index()
     {
-        //
+        return '777';
     }
 
     /**
