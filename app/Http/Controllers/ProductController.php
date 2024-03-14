@@ -16,6 +16,7 @@ class ProductController extends Controller
         return '111';
     }
 
+
     /**
      * Show the form for creating a new resource.
      */
@@ -37,7 +38,7 @@ class ProductController extends Controller
      */
     public function show(string $id)
     {
-        //
+        return 'Este es el producto '. $id;
     }
 
     /**
