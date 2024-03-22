@@ -2,17 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Http\Controllers\ProductController;
+
 
 class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
+     //Invocar el modelo
     public function index()
     {
-
+       // $products=Product::all();
+        //foreach(
+      //  $products as $product
+      // ){
+      //      echo($product->id.'.'.$product->name.'<br/>');
+     //  }
         return '111';
     }
 
@@ -37,8 +45,11 @@ class ProductController extends Controller
      * Display the specified resource.
      */
     public function show(string $id)
-    {
-        return 'Este es el producto '. $id;
+     {
+           // $product=Product::where('id',$id)->first();
+
+               // echo($product->id.'.'.$product->name.'<br/>');
+        //return 'Este es el producto '. $id;
     }
 
     /**
