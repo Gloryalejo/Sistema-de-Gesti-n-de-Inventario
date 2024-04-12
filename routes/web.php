@@ -29,8 +29,7 @@ Route::get('/', function () {
 });
 
 
-Route::resource('/products', ProductController::class);
-
+Route::resource('products', ProductController::class);
 
 Route::resource('/categories', CategoriesController::class);
 
