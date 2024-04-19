@@ -25,11 +25,11 @@ use App\Http\Controllers\UserController;
 
 Route::get('/', function () {
     //return view('welcome');
-    return ('pagina inicial');
+    return view ('frontend.index');
 });
 
 
-Route::resource('products', ProductController::class);
+Route::resource('/products', ProductController::class);
 
 Route::resource('/categories', CategoriesController::class);
 

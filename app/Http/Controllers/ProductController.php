@@ -1,14 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Models\Product;
-use App\Http\Requests\ProductRequest;
 
-/**
- * Class ProductController
- * @package App\Http\Controllers
- */
+use Illuminate\Http\Request;
+
 class ProductController extends Controller
 {
     /**
@@ -16,10 +12,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::paginate();
-
-        return view('product.index', compact('products'))
-            ->with('i', (request()->input('page', 1) - 1) * $products->perPage());
+        $products = Product::all();
+        return view('products.index', compact('products'));
     }
 
     /**
@@ -27,57 +21,55 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $product = new Product();
-        return view('product.create', compact('product'));
+        return view('products.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(ProductRequest $request)
+    public function store(Request $request)
     {
-        Product::create($request->validated());
+        $request->validate([
+            'name' => 'required',
+            'description' => 'string',
+            'base_price' => 'required',
+            'base_cost' => 'required'
+        ]);
 
-        return redirect()->route('products.index')
-            ->with('success', 'Product created successfully.');
+        Product::create($request->all());
+
+        return redirect()->route('products.index');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show($id)
+    public function show(string $id)
     {
-        $product = Product::find($id);
-
-        return view('product.show', compact('product'));
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($id)
+    public function edit(string $id)
     {
-        $product = Product::find($id);
-
-        return view('product.edit', compact('product'));
+        //
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(ProductRequest $request, Product $product)
+    public function update(Request $request, string $id)
     {
-        $product->update($request->validated());
-
-        return redirect()->route('products.index')
-            ->with('success', 'Product updated successfully');
+        //
     }
 
-    public function destroy($id)
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(string $id)
     {
-        Product::find($id)->delete();
-
-        return redirect()->route('products.index')
-            ->with('success', 'Product deleted successfully');
+        //
     }
 }
