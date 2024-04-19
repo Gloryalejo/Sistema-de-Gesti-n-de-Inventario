@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class UsersController extends Controller
@@ -11,7 +12,8 @@ class UsersController extends Controller
      */
     public function index()
     {
-        return '888';
+        $users = User::get();
+        return view('user.index', compact('users'));
     }
 
     /**
@@ -19,7 +21,7 @@ class UsersController extends Controller
      */
     public function create()
     {
-        //
+        return view('user.create');
     }
 
     /**
@@ -27,7 +29,23 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|max:50|string',
+            'last_name' => 'required|max:70|string',
+            'role_id' => 'required',
+            'email' => 'required|max:255|string',
+            'password' => 'required|max:255|string'
+        ]);
+
+        User::create([
+            'name' => $request->name,
+            'last_name' => $request->last_name,
+            'role_id' => $request->role_id,
+            'email' => $request->email,
+            'password' => $request->password,
+        ]);
+
+        return redirect('users/create')->with('status', 'User Created');
     }
 
     /**
@@ -43,7 +61,8 @@ class UsersController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $users = User::findOrFail($id);
+        return view('user.edit', compact('users'));
     }
 
     /**
@@ -51,7 +70,23 @@ class UsersController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'name' => 'required|max:50|string',
+            'last_name' => 'required|max:70|string',
+            'role_id' => 'required',
+            'email' => 'required|max:255|string',
+            'password' => 'required|max:255|string'
+        ]);
+
+        User::findOrFail($id)->update([
+            'name' => $request->name,
+            'last_name' => $request->last_name,
+            'role_id' => $request->role_id,
+            'email' => $request->email,
+            'password' => $request->password,
+        ]);
+
+        return redirect()->back()->with('status', 'User Updated');
     }
 
     /**
@@ -59,6 +94,9 @@ class UsersController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $users = User::findOrFail($id);
+        $users->delete();
+
+        return redirect()->back()->with('status', 'User Deleted');
     }
 }

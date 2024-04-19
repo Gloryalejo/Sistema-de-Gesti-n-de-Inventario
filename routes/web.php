@@ -9,7 +9,7 @@ use App\Http\Controllers\InventoryLogsController;
 use App\Http\Controllers\PermissionsController;
 use App\Http\Controllers\RolesController;
 use App\Http\Controllers\SupplierController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\UsersController;
 
 
 /*
@@ -43,8 +43,15 @@ Route::resource('/roles', RolesController::class);
 
 Route::resource('/suppliers', SupplierController::class);
 
-Route::resource('/users', UserController::class);
+Route::resource('/users', UsersController::class);
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/users/create', [App\Http\Controllers\UsersController::class, 'create']);
+Route::post('/users', [App\Http\Controllers\UsersController::class, 'store']);
+Route::get('/users/{id}/edit', [App\Http\Controllers\UsersController::class, 'edit']);
+Route::put('/users/{id}/edit', [App\Http\Controllers\UsersController::class, 'update']);
+Route::get('/users/{id}/delete', [App\Http\Controllers\UsersController::class, 'destroy']);
+
