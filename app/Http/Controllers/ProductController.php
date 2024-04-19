@@ -12,8 +12,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::all();
-        return view('products.index', compact('products'));
+        $products = Product::get();
+        return view('product.index', compact('products'));
     }
 
     /**
@@ -21,7 +21,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('products.create');
+        return view('product.create');
     }
 
     /**
@@ -30,15 +30,22 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required',
-            'description' => 'string',
+            'name' => 'required|max:30|string',
+            'description' => 'required|max:200|string',
             'base_price' => 'required',
-            'base_cost' => 'required'
+            'base_cost' => 'required',
+            'category_id' => 'required'
         ]);
 
-        Product::create($request->all());
+        Product::create([
+            'name' => $request->name,
+            'description' => $request->description,
+            'base_price' => $request->base_price,
+            'base_cost' => $request->base_cost,
+            'category_id' => $request->category_id,
+        ]);
 
-        return redirect()->route('products.index');
+        return redirect('products/create')->with('status', 'Product Created');
     }
 
     /**
@@ -54,7 +61,8 @@ class ProductController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $products = Product::findOrFail($id);
+        return view('product.edit', compact('products'));
     }
 
     /**
@@ -62,7 +70,23 @@ class ProductController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'name' => 'required|max:30|string',
+            'description' => 'required|max:200|string',
+            'base_price' => 'required',
+            'base_cost' => 'required',
+            'category_id' => 'required'
+        ]);
+
+        Product::findOrFail($id)->update([
+            'name' => $request->name,
+            'description' => $request->description,
+            'base_price' => $request->base_price,
+            'base_cost' => $request->base_cost,
+            'category_id' => $request->category_id,
+        ]);
+
+        return redirect()->back()->with('status', 'Product Updated');
     }
 
     /**
@@ -70,6 +94,9 @@ class ProductController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $products = Product::findOrFail($id);
+        $products->delete();
+
+        return redirect()->back()->with('status', 'Product Deleted');
     }
 }

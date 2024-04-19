@@ -63,3 +63,17 @@ Route::get('/suppliers/{id}/edit', [App\Http\Controllers\SuppliersController::cl
 Route::put('/suppliers/{id}/edit', [App\Http\Controllers\SuppliersController::class, 'update']);
 Route::get('/suppliers/{id}/delete', [App\Http\Controllers\SuppliersController::class, 'destroy']);
 
+//Rutas CRUD Products
+Route::get('/products/create', [App\Http\Controllers\ProductController::class, 'create']);
+Route::post('/products', [App\Http\Controllers\ProductController::class, 'store']);
+Route::get('/products/{id}/edit', [App\Http\Controllers\ProductController::class, 'edit']);
+Route::put('/products/{id}/edit', [App\Http\Controllers\ProductController::class, 'update']);
+Route::get('/products/{id}/delete', [App\Http\Controllers\ProductController::class, 'destroy']);
+
+//Rutas CRUD Categories
+Route::get('/categories/create', [App\Http\Controllers\CategoriesController::class, 'create']);
+Route::post('/categories', [App\Http\Controllers\CategoriesController::class, 'store']);
+Route::get('/categories/{id}/edit', [App\Http\Controllers\CategoriesController::class, 'edit']);
+Route::put('/categories/{id}/edit', [App\Http\Controllers\CategoriesController::class, 'update']);
+Route::get('/categories/{id}/delete', [App\Http\Controllers\CategoriesController::class, 'destroy']);
+
