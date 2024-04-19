@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Supplier;
 use Illuminate\Http\Request;
 
 class SuppliersController extends Controller
@@ -11,7 +12,8 @@ class SuppliersController extends Controller
      */
     public function index()
     {
-        return '777';
+        $suppliers = Supplier::get();
+        return view('supplier.index', compact('suppliers'));
     }
 
     /**
@@ -19,7 +21,7 @@ class SuppliersController extends Controller
      */
     public function create()
     {
-        //
+        return view('supplier.create');
     }
 
     /**
@@ -27,7 +29,19 @@ class SuppliersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|max:30|string',
+            'address' => 'required|max:150|string',
+            'phone' => 'required',
+        ]);
+
+        Supplier::create([
+            'name' => $request->name,
+            'address' => $request->address,
+            'phone' => $request->phone,
+        ]);
+
+        return redirect('suppliers/create')->with('status', 'Supplier Created');
     }
 
     /**
@@ -43,7 +57,8 @@ class SuppliersController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $suppliers = Supplier::findOrFail($id);
+        return view('supplier.edit', compact('suppliers'));
     }
 
     /**
@@ -51,7 +66,19 @@ class SuppliersController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'name' => 'required|max:30|string',
+            'address' => 'required|max:150|string',
+            'phone' => 'required',
+        ]);
+
+        Supplier::findOrFail($id)->update([
+            'name' => $request->name,
+            'address' => $request->address,
+            'phone' => $request->phone,
+        ]);
+
+        return redirect()->back()->with('status', 'Supplier Updated');
     }
 
     /**
@@ -59,6 +86,9 @@ class SuppliersController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $suppliers = Supplier::findOrFail($id);
+        $suppliers->delete();
+
+        return redirect()->back()->with('status', 'Supplier Deleted');
     }
 }

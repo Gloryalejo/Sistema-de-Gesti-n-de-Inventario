@@ -5,69 +5,46 @@
 @endsection
 
 @section('content')
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="card">
-                    <div class="card-header">
-                        <div style="display: flex; justify-content: space-between; align-items: center;">
-
-                            <span id="card_title">
-                                {{ __('Supplier') }}
-                            </span>
-
-                             <div class="float-right">
-                                <a href="{{ route('suppliers.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
-                                  {{ __('Create New') }}
-                                </a>
-                              </div>
-                        </div>
-                    </div>
-                    @if ($message = Session::get('success'))
-                        <div class="alert alert-success m-4">
-                            <p>{{ $message }}</p>
-                        </div>
-                    @endif
-
-                    <div class="card-body bg-white">
-                        <div class="table-responsive">
-                            <table class="table table-striped table-hover">
-                                <thead class="thead">
-                                    <tr>
-                                        <th>No</th>
-                                        
-										<th>Name</th>
-										<th>Address</th>
-
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($suppliers as $supplier)
-                                        <tr>
-                                            <td>{{ ++$i }}</td>
-                                            
-											<td>{{ $supplier->name }}</td>
-											<td>{{ $supplier->address }}</td>
-
-                                            <td>
-                                                <form action="{{ route('suppliers.destroy',$supplier->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('suppliers.show',$supplier->id) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Show') }}</a>
-                                                    <a class="btn btn-sm btn-success" href="{{ route('suppliers.edit',$supplier->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a>
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> {{ __('Delete') }}</button>
-                                                </form>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-heeader">
+                    <h4>Suppliers
+                        <a href="{{ url('suppliers/create') }}" class="btn btn-primary float-end">Add Suppliers</a>
+                    </h4>
                 </div>
-                {!! $suppliers->links() !!}
+                <div class="card-body">
+
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Address</th>
+                                <th>Phone</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($suppliers as $item)
+                            <tr>
+                                <td>{{$item->id}}</td>
+                                <td>{{$item->name}}</td>
+                                <td>{{$item->address}}</td>
+                                <td>{{$item->phone}}</td>
+                                <td>
+                                    <a href="{{url('/suppliers/'.$item->id.'/edit')}}" class="btn btn-success mx-2">Edit</a>
+                                    <a href="{{url('/suppliers/'.$item->id.'/delete')}}" class="btn btn-danger mx-1"
+                                    onclick="return confirm('Are you sure you want to delete this supplier?')">Delete</a>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+
+                </div>
             </div>
         </div>
     </div>
+</div>
 @endsection

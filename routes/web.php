@@ -8,7 +8,7 @@ use App\Http\Controllers\InventoriesController;
 use App\Http\Controllers\InventoryLogsController;
 use App\Http\Controllers\PermissionsController;
 use App\Http\Controllers\RolesController;
-use App\Http\Controllers\SupplierController;
+use App\Http\Controllers\SuppliersController;
 use App\Http\Controllers\UsersController;
 
 
@@ -41,7 +41,7 @@ Route::resource('/permissions', PermissionsController::class);
 
 Route::resource('/roles', RolesController::class);
 
-Route::resource('/suppliers', SupplierController::class);
+Route::resource('/suppliers', SuppliersController::class);
 
 Route::resource('/users', UsersController::class);
 
@@ -49,9 +49,17 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+//Rutas CRUD Users
 Route::get('/users/create', [App\Http\Controllers\UsersController::class, 'create']);
 Route::post('/users', [App\Http\Controllers\UsersController::class, 'store']);
 Route::get('/users/{id}/edit', [App\Http\Controllers\UsersController::class, 'edit']);
 Route::put('/users/{id}/edit', [App\Http\Controllers\UsersController::class, 'update']);
 Route::get('/users/{id}/delete', [App\Http\Controllers\UsersController::class, 'destroy']);
+
+//Rutas CRUD Suppliers
+Route::get('/suppliers/create', [App\Http\Controllers\SuppliersController::class, 'create']);
+Route::post('/suppliers', [App\Http\Controllers\SuppliersController::class, 'store']);
+Route::get('/suppliers/{id}/edit', [App\Http\Controllers\SuppliersController::class, 'edit']);
+Route::put('/suppliers/{id}/edit', [App\Http\Controllers\SuppliersController::class, 'update']);
+Route::get('/suppliers/{id}/delete', [App\Http\Controllers\SuppliersController::class, 'destroy']);
 
