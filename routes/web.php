@@ -8,8 +8,7 @@ use App\Http\Controllers\InventoriesController;
 use App\Http\Controllers\InventoryLogsController;
 use App\Http\Controllers\PermissionsController;
 use App\Http\Controllers\RolesController;
-use App\Http\Controllers\SupplierController;
-use App\Http\Controllers\UserController;
+
 
 
 /*
@@ -41,9 +40,6 @@ Route::resource('/permissions', PermissionsController::class);
 
 Route::resource('/roles', RolesController::class);
 
-Route::resource('/suppliers', SupplierController::class);
-
-Route::resource('/users', UserController::class);
 
 Auth::routes();
 
