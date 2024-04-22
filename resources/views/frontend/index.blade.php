@@ -1,21 +1,24 @@
-<x-app-web-layout>
 
-    // nombre de la ventana visualmente
-    <x-slot:title>
-        Home
-    </x-slot>
 
-   <div class="py-5">
-        <div class="container">
-            <h4>welcome</h4>
+<!-- index.blade.php -->
+@extends('layouts.app')
+
+@section('navbar')
+    <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+    </nav>
+@endsection
+
+@section('content')
+    <div class="container">
+        <div class="py-5">
+            <div class="container">
+                <h4>Welcome</h4>
+                <p>Choose an action:</p>
+                <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                    <a href="{{ route('login') }}" class="btn btn-primary me-md-2" role="button">Login</a>
+                    <a href="{{ route('register') }}" class="btn btn-secondary" role="button">Register</a>
+                </div>
+            </div>
         </div>
     </div>
-
-
-    <x-slot:scripts>
-        <script>
-            alert("script");
-        </script>
-    </x-slot>
-
-</x-app-web-layout>    
+@endsection
