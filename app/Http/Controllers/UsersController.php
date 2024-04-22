@@ -99,4 +99,17 @@ class UsersController extends Controller
 
         return redirect()->back()->with('status', 'User Deleted');
     }
+
+    public function current(Request $request)
+    {
+        $user = $request->attributes->get('user');
+
+        return $this->formatResponse(
+            'User details provided',
+            [
+                'id' => $user->id,
+                'email' => $user->email,
+            ]
+        );
+    }
 }
