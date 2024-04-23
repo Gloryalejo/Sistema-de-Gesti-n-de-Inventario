@@ -1,4 +1,4 @@
-@extends('layouts.app')
+<!-- @extends('layouts.app')
 
 @section('template_title')
     {{ $user->name ?? __('Show') . " " . __('User') }}
@@ -43,3 +43,4 @@
         </div>
     </section>
 @endsection
+ -->
