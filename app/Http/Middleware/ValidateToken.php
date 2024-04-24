@@ -18,17 +18,12 @@ class ValidateToken
     {
         $token = $request->bearerToken();
 
-        /*if (empty($token)) {
-            return redirect('/login');
-        }*/
-
         if (empty($token)) {
-            // Si la ruta actual es login o register, permitir la ejecución normal
-            if ($request->is('login') || $request->is('register')) {
-                return $next($request);
-            } else {
-                return redirect()->route('login');
-            }
+            return response()->json([
+                'message' => 'Missing token',
+                'data' => json_decode('{}'),
+                'status' => 401
+            ], 401);
         }
 
         $user = User::fromToken($token);
