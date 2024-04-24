@@ -12,9 +12,16 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::get();
-        return view('product.index', compact('products'));
+        if (auth()->check()) {
+            // El usuario está autenticado, puedes obtener los productos
+            $products = Product::all();
+            return view('products.index', compact('products'));
+        } else {
+            // El usuario no está autenticado, redirige al inicio de sesión
+            return redirect()->route('login');
+        }
     }
+    
 
     /**
      * Show the form for creating a new resource.

@@ -30,6 +30,9 @@ Route::get('/', function () {
 
 
 Route::resource('/products', ProductController::class);
+Route::middleware('jwt.verify')->resource('products', ProductController::class);
+
+
 
 Route::resource('/categories', CategoriesController::class);
 
