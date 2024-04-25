@@ -12,16 +12,9 @@ class ProductController extends Controller
      */
     public function index()
     {
-        if (auth()->check()) {
-            // El usuario está autenticado, puedes obtener los productos
-            $products = Product::all();
-            return view('products.index', compact('products'));
-        } else {
-            // El usuario no está autenticado, redirige al inicio de sesión
-            return redirect()->route('login');
-        }
+        $products = Product::get();
+        return view('product.index', compact('products'));
     }
-    
 
     /**
      * Show the form for creating a new resource.
@@ -36,7 +29,6 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-       // dd($request->category_id);
         $request->validate([
             'name' => 'required|max:30|string',
             'description' => 'required|max:200|string',
