@@ -10,6 +10,7 @@ use App\Http\Controllers\PermissionsController;
 use App\Http\Controllers\RolesController;
 use App\Http\Controllers\SuppliersController;
 use App\Http\Controllers\UsersController;
+use Illuminate\Http\Request;
 
 
 /*
@@ -23,57 +24,59 @@ use App\Http\Controllers\UsersController;
 |
 */
 
+Auth::routes();
+
 Route::get('/', function () {
     //return view('welcome');
     return view ('frontend.index');
 });
 
-
-Route::resource('/products', ProductController::class);
-
-Route::resource('/categories', CategoriesController::class);
-
-Route::resource('/functions', FunctionsController::class);
-
-Route::resource('/inventories', InventoriesController::class);
-
-Route::resource('/permissions', PermissionsController::class);
-
-Route::resource('/roles', RolesController::class);
-
-Route::resource('/suppliers', SuppliersController::class);
-
-Route::resource('/users', UsersController::class);
-
-Auth::routes();
-
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-//Rutas CRUD Users
-Route::get('/users/create', [App\Http\Controllers\UsersController::class, 'create']);
-Route::post('/users', [App\Http\Controllers\UsersController::class, 'store']);
-Route::get('/users/{id}/edit', [App\Http\Controllers\UsersController::class, 'edit']);
-Route::put('/users/{id}/edit', [App\Http\Controllers\UsersController::class, 'update']);
-Route::get('/users/{id}/delete', [App\Http\Controllers\UsersController::class, 'destroy']);
+Route::get('users', [App\Http\Controllers\UsersController::class, 'index'])->middleware(['auth:sanctum', 'ability:check-status,place-orders']);
+Route::get('/users/create', [App\Http\Controllers\UsersController::class, 'create'])->middleware(['auth:sanctum', 'ability:check-status,place-orders']);
+Route::get('/users/{id}/edit', [App\Http\Controllers\UsersController::class, 'edit'])->middleware(['auth:sanctum', 'ability:check-status,place-orders']);
+Route::put('/users/{id}/edit', [App\Http\Controllers\UsersController::class, 'update'])->middleware(['auth:sanctum', 'ability:check-status,place-orders']);
+Route::get('/users/{id}/delete', [App\Http\Controllers\UsersController::class, 'destroy'])->middleware(['auth:sanctum', 'ability:check-status,place-orders']);
 
-//Rutas CRUD Suppliers
-Route::get('/suppliers/create', [App\Http\Controllers\SuppliersController::class, 'create']);
-Route::post('/suppliers', [App\Http\Controllers\SuppliersController::class, 'store']);
-Route::get('/suppliers/{id}/edit', [App\Http\Controllers\SuppliersController::class, 'edit']);
-Route::put('/suppliers/{id}/edit', [App\Http\Controllers\SuppliersController::class, 'update']);
-Route::get('/suppliers/{id}/delete', [App\Http\Controllers\SuppliersController::class, 'destroy']);
+Route::get('products', [App\Http\Controllers\ProductController::class, 'index'])->middleware(['auth:sanctum', 'ability:check-status,place-orders']);
+Route::get('/products/create', [App\Http\Controllers\ProductController::class, 'create'])->middleware(['auth:sanctum', 'ability:check-status,place-orders']);
+Route::get('/products/{id}/edit', [App\Http\Controllers\ProductController::class, 'edit'])->middleware(['auth:sanctum', 'ability:check-status,place-orders']);
+Route::put('/products/{id}/edit', [App\Http\Controllers\ProductController::class, 'update'])->middleware(['auth:sanctum', 'ability:check-status,place-orders']);
+Route::get('/products/{id}/delete', [App\Http\Controllers\ProductController::class, 'destroy'])->middleware(['auth:sanctum', 'ability:check-status,place-orders']);
 
-//Rutas CRUD Products
-Route::get('/products/create', [App\Http\Controllers\ProductController::class, 'create']);
-Route::post('/products', [App\Http\Controllers\ProductController::class, 'store']);
-Route::get('/products/{id}/edit', [App\Http\Controllers\ProductController::class, 'edit']);
-Route::put('/products/{id}/edit', [App\Http\Controllers\ProductController::class, 'update']);
-Route::get('/products/{id}/delete', [App\Http\Controllers\ProductController::class, 'destroy']);
+Route::get('categories', [App\Http\Controllers\CategoriesController::class, 'index'])->middleware(['auth:sanctum', 'ability:check-status,place-orders']);
+Route::get('/categories/create', [App\Http\Controllers\CategoriesController::class, 'create'])->middleware(['auth:sanctum', 'ability:check-status,place-orders']);
+//Route::post('/categories', [App\Http\Controllers\CategoriesController::class, 'store'])->middleware(['auth:sanctum', 'ability:check-status,place-orders']);
+Route::get('/categories/{id}/edit', [App\Http\Controllers\CategoriesController::class, 'edit'])->middleware(['auth:sanctum', 'ability:check-status,place-orders']);
+Route::put('/categories/{id}/edit', [App\Http\Controllers\CategoriesController::class, 'update'])->middleware(['auth:sanctum', 'ability:check-status,place-orders']);
+Route::get('/categories/{id}/delete', [App\Http\Controllers\CategoriesController::class, 'destroy'])->middleware(['auth:sanctum', 'ability:check-status,place-orders']);
 
-//Rutas CRUD Categories
-Route::get('/categories/create', [App\Http\Controllers\CategoriesController::class, 'create']);
-Route::post('/categories', [App\Http\Controllers\CategoriesController::class, 'store']);
-Route::get('/categories/{id}/edit', [App\Http\Controllers\CategoriesController::class, 'edit']);
-Route::put('/categories/{id}/edit', [App\Http\Controllers\CategoriesController::class, 'update']);
-Route::get('/categories/{id}/delete', [App\Http\Controllers\CategoriesController::class, 'destroy']);
+Route::get('functions', [App\Http\Controllers\FunctionsController::class, 'index'])->middleware(['auth:sanctum', 'ability:check-status,place-orders']);
+
+
+Route::get('inventories', [App\Http\Controllers\InventoriesController::class, 'index'])->middleware(['auth:sanctum', 'ability:check-status,place-orders']);
+
+
+Route::get('permissions', [App\Http\Controllers\PermissionsController::class, 'index'])->middleware(['auth:sanctum', 'ability:check-status,place-orders']);
+
+
+Route::get('roles', [App\Http\Controllers\RolesController::class, 'index'])->middleware(['auth:sanctum', 'ability:check-status,place-orders']);
+
+Route::get('/suppliers', [App\Http\Controllers\SuppliersController::class, 'store'])->middleware(['auth:sanctum', 'ability:check-status,place-orders']);
+Route::get('/suppliers/create', [App\Http\Controllers\SupplierController::class, 'create'])->middleware(['auth:sanctum', 'ability:check-status,place-orders']);
+Route::get('/suppliers/{id}/edit', [App\Http\Controllers\SupplierController::class, 'edit'])->middleware(['auth:sanctum', 'ability:check-status,place-orders']);
+Route::put('/suppliers/{id}/edit', [App\Http\Controllers\SupplierController::class, 'update'])->middleware(['auth:sanctum', 'ability:check-status,place-orders']);
+Route::get('/suppliers/{id}/delete', [App\Http\Controllers\SupplierController::class, 'destroy'])->middleware(['auth:sanctum', 'ability:check-status,place-orders']);
+
+
+
+
+
+
+
+
+
+
+
 

@@ -29,7 +29,6 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-       // dd($request->category_id);
         $request->validate([
             'name' => 'required|max:30|string',
             'description' => 'required|max:200|string',

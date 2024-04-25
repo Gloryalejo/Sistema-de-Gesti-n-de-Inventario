@@ -2,8 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Middleware\ValidateToken;
-use App\Http\Controllers;
+use App\Http\Controllers\UsersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,10 +19,6 @@ use App\Http\Controllers;
 //     return $request->user();
 // });
 
-Route::prefix('authentication')->group(function () {
-    Route::post('login', [Controllers\AuthController::class, 'login']);
-});
-
-Route::prefix("user")->middleware(ValidateToken::class)->group(function () {
-    Route::get("current", [Controllers\UsersController::class, 'current']);
-});
+Route::get('/products', [ProductController::class])->middleware('auth:sanctum');
+Route::post('/auth/register', [UsersController::class, 'createUser']);
+Route::post('/auth/login', [UsersController::class, 'loginUser']);

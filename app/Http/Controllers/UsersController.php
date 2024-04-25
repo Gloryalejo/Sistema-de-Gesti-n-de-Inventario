@@ -7,11 +7,16 @@ use Illuminate\Http\Request;
 
 class UsersController extends Controller
 {
+
+
+
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
+
         $users = User::get();
         return view('user.index', compact('users'));
     }
@@ -19,16 +24,14 @@ class UsersController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
-    {
-        return view('user.create');
-    }
 
     /**
      * Store a newly created resource in storage.
      */
+
     public function store(Request $request)
     {
+
         $request->validate([
             'name' => 'required|max:50|string',
             'last_name' => 'required|max:70|string',
@@ -98,18 +101,5 @@ class UsersController extends Controller
         $users->delete();
 
         return redirect()->back()->with('status', 'User Deleted');
-    }
-
-    public function current(Request $request)
-    {
-        $user = $request->attributes->get('user');
-
-        return $this->formatResponse(
-            'User details provided',
-            [
-                'id' => $user->id,
-                'email' => $user->email,
-            ]
-        );
     }
 }
