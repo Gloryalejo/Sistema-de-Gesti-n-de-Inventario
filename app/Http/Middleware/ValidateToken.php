@@ -45,3 +45,4 @@ class ValidateToken
         return $next($request);
     }
 }
+
