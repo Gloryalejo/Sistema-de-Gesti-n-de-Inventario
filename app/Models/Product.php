@@ -10,7 +10,7 @@ class Product extends Model
     use HasFactory;
 
     protected $table = 'products';
-    protected $fillable = ['name', 'description', 'base_price', 'base_cost','category_id', 'supplier_id'];
+    protected $fillable = ['name', 'description', 'base_price', 'base_cost','category_id'];
     
 
     /**
@@ -30,7 +30,17 @@ class Product extends Model
      */
     public function suppliers()
     {
-        return $this->hasMany(Supplier::class, 'id', 'supplier_id');
+        return $this->hasMany(ProductSupplier::class, 'product_id', 'id');
     }
+
+    /**
+     * Get all of the comments for the Product
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    // public function suppliers()
+    // {
+    //     return $this->hasMany(Supplier::class, 'id', 'supplier_id');
+    // }
 
 }

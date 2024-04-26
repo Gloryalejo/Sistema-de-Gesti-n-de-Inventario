@@ -78,8 +78,8 @@
                     </div>
 
                     <div class="mb-3">
-                        <label>Supplier ID</label>
-                        <input type="number" name="supplier_id" value="{{ $products->supplier_id }}">
+                        <label>Supplier IDs</label>
+                        <input type="text" name="supplier_id" value="{{ $products->supplier_id }}">
                         @error('supplier_id')
                         <span class="text-danger">
                                     {{$message}}

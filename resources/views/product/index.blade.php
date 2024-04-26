@@ -37,7 +37,7 @@
                                 <td>{{$item->base_price}}</td>
                                 <td>{{$item->base_cost}}</td>
                                 <td>{{$item->category->name}}</td>
-                                <td>{{$item->suppliers->pluck("name")}}</td>
+                                <td>{{\App\Models\Supplier::whereIn('id', $item->suppliers->pluck("supplier_id"))->get()->pluck("name")  }}</td>
                                 <td>
                                     <a href="{{url('/products/'.$item->id.'/edit')}}" class="btn btn-success mx-2">Edit</a>
                                     <a href="{{url('/products/'.$item->id.'/delete')}}" class="btn btn-danger mx-1"

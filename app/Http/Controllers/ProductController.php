@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 use App\Models\Product;
+use App\Models\ProductSupplier;
+use App\Models\Supplier;
 
 use Illuminate\Http\Request;
 
@@ -40,14 +42,24 @@ class ProductController extends Controller
             'supplier_id' => 'required',
         ]);
 
-        Product::create([
+        $product = Product::create([
             'name' => $request->name,
             'description' => $request->description,
             'base_price' => $request->base_price,
             'base_cost' => $request->base_cost,
             'category_id' => $request->category_id,
-            'supplier_id' => $request->supplier_id,
+            // 'supplier_id' => $request->supplier_id,
         ]);
+
+        $suppliers = $request->supplier_id;
+        $supplierArray = explode(',', $suppliers);
+
+        foreach ($supplierArray as $supplier) {
+            ProductSupplier::create([
+                'product_id' => $product->id,
+                'supplier_id' => $supplier
+            ]);
+        }
 
         return redirect('products/create')->with('status', 'Product Created');
     }
@@ -89,8 +101,22 @@ class ProductController extends Controller
             'base_price' => $request->base_price,
             'base_cost' => $request->base_cost,
             'category_id' => $request->category_id,
-            'supplier_id' => $request->supplier_id
+            // 'supplier_id' => $request->supplier_id
         ]);
+        $suppliers = $request->supplier_id;
+        $supplierArray = explode(',', $suppliers);
+
+        ProductSupplier::where([
+            ['product_id', $id],
+            // ['supplier_id', $supplier]
+            ])->delete();
+
+        foreach ($supplierArray as $supplier) {
+            ProductSupplier::create([
+                'product_id' => $id,
+                'supplier_id' => $supplier
+            ]);
+        }
 
         return redirect()->back()->with('status', 'Product Updated');
     }
@@ -100,6 +126,11 @@ class ProductController extends Controller
      */
     public function destroy(string $id)
     {
+        ProductSupplier::where([
+            ['product_id', $id],
+            // ['supplier_id', $supplier]
+            ])->delete();
+
         $products = Product::findOrFail($id);
         $products->delete();
 

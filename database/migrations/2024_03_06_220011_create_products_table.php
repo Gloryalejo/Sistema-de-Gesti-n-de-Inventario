@@ -19,9 +19,6 @@ return new class extends Migration
             $table->decimal('base_cost', 8, 2);//Registra el costo de adquisición o producción necesario para obtener el producto
             $table->bigInteger('category_id')->unsigned();//Es la clave foránea que establecerá la relación con la tabla de categorías.
             $table->foreign('category_id')->references('id')->on('categories')->onUpdate('cascade'); //Nueva restricción de clave foránea para 'category_id'
-            $table->bigInteger('supplier_id')->unsigned();//Es la clave foránea que establecerá la relación con la tabla de categorías.
-            $table->foreign('supplier_id')->references('id')->on('suppliers')->onUpdate('cascade'); //Nueva restricción de clave foránea para 'category_id'
-
 
             $table->timestamps();//Marcas de tiempo para rastrear la fecha de creación y última actualización
         });
