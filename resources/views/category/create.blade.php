@@ -23,7 +23,7 @@
                     </h4>
                 </div>
                 <div class="card-body">
-                    <form action="{{ url('/categories') }}" method="POST">
+                    <form action="{{ url('categories/create') }}" method="POST">
                         @csrf
 
                     <div class="mb-3">

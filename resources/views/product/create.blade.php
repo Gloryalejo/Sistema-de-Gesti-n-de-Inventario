@@ -16,7 +16,6 @@
                     </div>
             @endif
 
-
             <div class="card">
                 <div class="card-heeader">
                     <h4>Add Product
@@ -24,9 +23,8 @@
                     </h4>
                 </div>
                 <div class="card-body">
-                    <form action="{{ url('/products') }}" method="POST">
-                        @csrf
-
+                    <form action="{{ url('products/create') }}" method="POST">
+                        @csrf 
                     <div class="mb-3">
                         <label>Name</label>
                         <input type="text" name="name" value="{{ old('name') }}">
