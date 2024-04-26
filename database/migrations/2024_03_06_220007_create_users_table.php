@@ -15,8 +15,8 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();// Identificador único para cada usuario en la tabla.
             $table->string('name');// Nombre del usuario
-            $table->string('last_name')->nullable;// Apellido del usuario
-            $table->bigInteger('role_id')->unsigned();// Identificador único en la tabla de "roles" que especifica el tipo de rol asignado a un usuario.
+            $table->string('last_name')->nullable();// Apellido del usuario
+            $table->bigInteger('role_id')->unsigned()->nullable();// Identificador único en la tabla de "roles" que especifica el tipo de rol asignado a un usuario.
             $table->foreign('role_id')->references('id')->on('roles')->onUpdate('cascade'); // Constraint del foreign key de role_id
             $table->string('email')->unique();// Almacena la dirección de correo electrónico, una forma común de comunicación y registro en sistemas.
             $table->string('password');// Almacena la clave elegida por el usuario, encriptada para garantizar que solo el usuario pueda acceder a su contenido.

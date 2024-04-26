@@ -37,6 +37,7 @@ class ProductController extends Controller
             'base_price' => 'required',
             'base_cost' => 'required',
             'category_id' => 'required|exists:categories,id',
+            'supplier_id' => 'required',
         ]);
 
         Product::create([
@@ -45,6 +46,7 @@ class ProductController extends Controller
             'base_price' => $request->base_price,
             'base_cost' => $request->base_cost,
             'category_id' => $request->category_id,
+            'supplier_id' => $request->supplier_id,
         ]);
 
         return redirect('products/create')->with('status', 'Product Created');
@@ -77,7 +79,8 @@ class ProductController extends Controller
             'description' => 'required|max:200|string',
             'base_price' => 'required',
             'base_cost' => 'required',
-            'category_id' => 'required'
+            'category_id' => 'required',
+            'supplier_id' => 'required'
         ]);
 
         Product::findOrFail($id)->update([
@@ -86,6 +89,7 @@ class ProductController extends Controller
             'base_price' => $request->base_price,
             'base_cost' => $request->base_cost,
             'category_id' => $request->category_id,
+            'supplier_id' => $request->supplier_id
         ]);
 
         return redirect()->back()->with('status', 'Product Updated');

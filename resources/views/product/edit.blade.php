@@ -78,6 +78,16 @@
                     </div>
 
                     <div class="mb-3">
+                        <label>Supplier ID</label>
+                        <input type="number" name="supplier_id" value="{{ $products->supplier_id }}">
+                        @error('supplier_id')
+                        <span class="text-danger">
+                                    {{$message}}
+                        </span>
+                        @enderror
+                    </div>
+
+                    <div class="mb-3">
                         <button type="submit" class="btn btn-primary">Update</button>
                     </div>
                 </div>
