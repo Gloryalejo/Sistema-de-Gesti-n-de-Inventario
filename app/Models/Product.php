@@ -11,4 +11,14 @@ class Product extends Model
 
     protected $table = 'products';
     protected $fillable = ['name', 'description', 'base_price', 'base_cost','category_id'];
+
+    /**
+     * Get all of the categories for the Product
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function category(): HasOne
+    {
+        return $this->hasMany(Category::class);
+    }
 }

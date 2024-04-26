@@ -36,7 +36,7 @@ class ProductController extends Controller
             'description' => 'required|max:200|string',
             'base_price' => 'required',
             'base_cost' => 'required',
-            'category_id' => 'required'
+            'category_id' => 'required|exists:categories,id',
         ]);
 
         Product::create([
