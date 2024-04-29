@@ -21,6 +21,7 @@ return new class extends Migration
             $table->foreign('category_id')->references('id')->on('categories')->onUpdate('cascade'); //Nueva restricción de clave foránea para 'category_id'
 
             $table->timestamps();//Marcas de tiempo para rastrear la fecha de creación y última actualización
+            $table->softDeletes(); // Agrega la columna 'deleted_at' para Soft Deletes
         });
     }
 

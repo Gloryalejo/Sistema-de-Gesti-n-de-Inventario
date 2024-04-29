@@ -4,14 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Product extends Model
 {
     use HasFactory;
+    use SoftDeletes;
 
     protected $table = 'products';
     protected $fillable = ['name', 'description', 'base_price', 'base_cost','category_id'];
-    
+    protected $dates = ['deleted_at'];
 
     /**
      * Get all of the categories for the Product
