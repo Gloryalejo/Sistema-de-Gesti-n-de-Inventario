@@ -1,5 +1,3 @@
-<!-- resources/views/inventory/index.blade.php -->
-
 @extends('layouts.app')
 
 @section('content')
@@ -20,8 +18,7 @@
                     @foreach ($inventoryRecords as $record)
                         <tr>
                             <td>{{ $record->id }}</td>
-                            <td>{{ $record->product->name }}</td>
-                            <td>{{ $record->movement_type }}</td>
+                            <td>{{ $record->product ? $record->product->name : ($record->product_id ? 'Producto eliminado' : 'N/A') }}</td>                            <td>{{ $record->product ? $record->movement_type : 'Salida' }}</td>
                             <td>{{ $record->movement_date }}</td>
                         </tr>
                     @endforeach
