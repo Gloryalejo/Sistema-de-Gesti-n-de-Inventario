@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\Inventory;
 
 class Product extends Model
 {
@@ -14,6 +15,36 @@ class Product extends Model
     protected $table = 'products';
     protected $fillable = ['name', 'description', 'base_price', 'base_cost','category_id'];
     protected $dates = ['deleted_at'];
+
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::created(function ($product) {
+            // Crear un registro de inventario al crear un nuevo producto
+            Inventory::create([
+                'product_id' => $product->id,
+                'movement_type' => 'Entrada', // Por ejemplo, asume una entrada al crear un producto
+                'movement_date' => now(),
+            ]);
+        });
+
+        // Evento al eliminar un producto
+        static::deleted(function ($product) {
+            // Registrar una salida de inventario
+            Inventory::create([
+                'product_id' => $product->id,
+                'movement_type' => 'Salida',
+                'movement_date' => now(),
+            ]);
+        });
+    }
+
+    public function inventory()
+    {
+        return $this->hasMany(Inventory::class, 'product_id', 'id');
+    }
 
     /**
      * Get all of the categories for the Product

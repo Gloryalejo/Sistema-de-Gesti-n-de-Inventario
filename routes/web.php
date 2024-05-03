@@ -11,6 +11,7 @@ use App\Http\Controllers\RolesController;
 use App\Http\Controllers\SuppliersController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\ProductLogController;
+use App\Http\Controllers\InventoryController;
 use Illuminate\Http\Request;
 
 
@@ -97,7 +98,7 @@ Route::put('/suppliers/{id}/edit', [App\Http\Controllers\SuppliersController::cl
 Route::get('/suppliers/{id}/delete', [App\Http\Controllers\SuppliersController::class, 'destroy']);
 
 
-
+Route::get('/inventory', [InventoryController::class, 'index']);
 
 
 
