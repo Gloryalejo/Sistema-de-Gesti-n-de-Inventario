@@ -99,6 +99,7 @@ Route::get('/suppliers/{id}/delete', [App\Http\Controllers\SuppliersController::
 
 
 Route::get('/inventory', [InventoryController::class, 'index']);
+Route::get('/inventory/out', [InventoryController::class, 'createOut']);
 
 
 
