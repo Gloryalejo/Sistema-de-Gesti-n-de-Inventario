@@ -42,19 +42,19 @@ Route::get('/users/{id}/edit', [App\Http\Controllers\UsersController::class, 'ed
 Route::put('/users/{id}/edit', [App\Http\Controllers\UsersController::class, 'update'])->middleware(['auth:sanctum', 'ability:check-status,place-orders']);
 Route::get('/users/{id}/delete', [App\Http\Controllers\UsersController::class, 'destroy'])->middleware(['auth:sanctum', 'ability:check-status,place-orders']);
 
-/* Route::get('products', [App\Http\Controllers\ProductController::class, 'index'])->middleware(['auth:sanctum', 'ability:check-status,place-orders']);
+Route::get('products', [App\Http\Controllers\ProductController::class, 'index'])->middleware(['auth:sanctum', 'ability:check-status,place-orders']);
 Route::get('/products/create', [App\Http\Controllers\ProductController::class, 'create'])->middleware(['auth:sanctum', 'ability:check-status,place-orders']);
 Route::post('/products/create', [App\Http\Controllers\ProductController::class, 'store'])->middleware(['auth:sanctum', 'ability:check-status,place-orders']);
 Route::get('/products/{id}/edit', [App\Http\Controllers\ProductController::class, 'edit'])->middleware(['auth:sanctum', 'ability:check-status,place-orders']);
 Route::put('/products/{id}/edit', [App\Http\Controllers\ProductController::class, 'update'])->middleware(['auth:sanctum', 'ability:check-status,place-orders']);
-Route::get('/products/{id}/delete', [App\Http\Controllers\ProductController::class, 'destroy'])->middleware(['auth:sanctum', 'ability:check-status,place-orders']); */
+Route::get('/products/{id}/delete', [App\Http\Controllers\ProductController::class, 'destroy'])->middleware(['auth:sanctum', 'ability:check-status,place-orders']);
 
-Route::get('products', [App\Http\Controllers\ProductController::class, 'index']);
-Route::get('/products/create', [App\Http\Controllers\ProductController::class, 'create']);
-Route::post('/products/create', [App\Http\Controllers\ProductController::class, 'store']);
-Route::get('/products/{id}/edit', [App\Http\Controllers\ProductController::class, 'edit']);
-Route::put('/products/{id}/edit', [App\Http\Controllers\ProductController::class, 'update']);
-Route::get('/products/{id}/delete', [App\Http\Controllers\ProductController::class, 'destroy']);
+// Route::get('products', [App\Http\Controllers\ProductController::class, 'index']);
+// Route::get('/products/create', [App\Http\Controllers\ProductController::class, 'create']);
+// Route::post('/products/create', [App\Http\Controllers\ProductController::class, 'store']);
+// Route::get('/products/{id}/edit', [App\Http\Controllers\ProductController::class, 'edit']);
+// Route::put('/products/{id}/edit', [App\Http\Controllers\ProductController::class, 'update']);
+// Route::get('/products/{id}/delete', [App\Http\Controllers\ProductController::class, 'destroy']);
 
 Route::get('/product-log', [App\Http\Controllers\ProductLogController:: class, 'index']);
 
@@ -75,7 +75,8 @@ Route::get('/categories/{id}/delete', [App\Http\Controllers\CategoriesController
 Route::get('functions', [App\Http\Controllers\FunctionsController::class, 'index'])->middleware(['auth:sanctum', 'ability:check-status,place-orders']);
 
 
-Route::get('inventories', [App\Http\Controllers\InventoriesController::class, 'index'])->middleware(['auth:sanctum', 'ability:check-status,place-orders']);
+Route::get('inventory', [App\Http\Controllers\InventoryController::class, 'index'])->middleware(['auth:sanctum', 'ability:check-status,place-orders']);
+Route::get('/inventory/out', [App\Http\Controllers\InventoryController::class, 'createOut'])->middleware(['auth:sanctum', 'ability:check-status,place-orders']);
 
 
 Route::get('permissions', [App\Http\Controllers\PermissionsController::class, 'index'])->middleware(['auth:sanctum', 'ability:check-status,place-orders']);
@@ -83,23 +84,23 @@ Route::get('permissions', [App\Http\Controllers\PermissionsController::class, 'i
 
 Route::get('roles', [App\Http\Controllers\RolesController::class, 'index'])->middleware(['auth:sanctum', 'ability:check-status,place-orders']);
 
-/* Route::get('suppliers', [App\Http\Controllers\SuppliersController::class, 'index'])->middleware(['auth:sanctum', 'ability:check-status,place-orders']);
+Route::get('suppliers', [App\Http\Controllers\SuppliersController::class, 'index'])->middleware(['auth:sanctum', 'ability:check-status,place-orders']);
 Route::get('/suppliers/create', [App\Http\Controllers\SuppliersController::class, 'create'])->middleware(['auth:sanctum', 'ability:check-status,place-orders']);
 Route::post('/suppliers/create', [App\Http\Controllers\SuppliersController::class, 'store'])->middleware(['auth:sanctum', 'ability:check-status,place-orders']);
 Route::get('/suppliers/{id}/edit', [App\Http\Controllers\SuppliersController::class, 'edit'])->middleware(['auth:sanctum', 'ability:check-status,place-orders']);
 Route::put('/suppliers/{id}/edit', [App\Http\Controllers\SuppliersController::class, 'update'])->middleware(['auth:sanctum', 'ability:check-status,place-orders']);
-Route::get('/suppliers/{id}/delete', [App\Http\Controllers\SuppliersController::class, 'destroy'])->middleware(['auth:sanctum', 'ability:check-status,place-orders']); */
+Route::get('/suppliers/{id}/delete', [App\Http\Controllers\SuppliersController::class, 'destroy'])->middleware(['auth:sanctum', 'ability:check-status,place-orders']);
 
-Route::get('suppliers', [App\Http\Controllers\SuppliersController::class, 'index']);
-Route::get('/suppliers/create', [App\Http\Controllers\SuppliersController::class, 'create']);
-Route::post('/suppliers/create', [App\Http\Controllers\SuppliersController::class, 'store']);
-Route::get('/suppliers/{id}/edit', [App\Http\Controllers\SuppliersController::class, 'edit']);
-Route::put('/suppliers/{id}/edit', [App\Http\Controllers\SuppliersController::class, 'update']);
-Route::get('/suppliers/{id}/delete', [App\Http\Controllers\SuppliersController::class, 'destroy']);
+// Route::get('suppliers', [App\Http\Controllers\SuppliersController::class, 'index']);
+// Route::get('/suppliers/create', [App\Http\Controllers\SuppliersController::class, 'create']);
+// Route::post('/suppliers/create', [App\Http\Controllers\SuppliersController::class, 'store']);
+// Route::get('/suppliers/{id}/edit', [App\Http\Controllers\SuppliersController::class, 'edit']);
+// Route::put('/suppliers/{id}/edit', [App\Http\Controllers\SuppliersController::class, 'update']);
+// Route::get('/suppliers/{id}/delete', [App\Http\Controllers\SuppliersController::class, 'destroy']);
 
 
-Route::get('/inventory', [InventoryController::class, 'index']);
-Route::get('/inventory/out', [InventoryController::class, 'createOut']);
+// Route::get('/inventory', [InventoryController::class, 'index']);
+// Route::get('/inventory/out', [InventoryController::class, 'createOut']);
 
 
 
