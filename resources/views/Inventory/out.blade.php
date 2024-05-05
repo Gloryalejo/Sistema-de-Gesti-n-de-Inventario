@@ -1,7 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Registrar Salida de Inventario</h1>
+<div class="container mt-3">
+    <h1 class="text-center">Registrar Salida de Inventario</h1>
 
     <form method="POST" action="{{ url('inventory/out') }}">
         @csrf
@@ -22,8 +23,9 @@
             <input type="date" name="movement_date" id="movement_date" class="form-control" value="{{ date('Y-m-d') }}">
         </div>
 
-        <!-- Agrega más campos según sea necesario -->
-
+        <div class="text-center">
         <button type="submit" class="btn btn-primary">Registrar Salida</button>
+        </div>
     </form>
+</div>
 @endsection
