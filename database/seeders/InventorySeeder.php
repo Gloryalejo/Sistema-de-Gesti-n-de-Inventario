@@ -15,15 +15,17 @@ class InventorySeeder extends Seeder
         // Ejemplo de creación de registros de inventario
         Inventory::create([
             'product_id' => 1,
-            'movement_type' => 'entrada',
+            'movement_type' => 'Entrada',
             'movement_date' => now(),
+            'quantity' => 1,
             // Otros campos según sea necesario
         ]);
 
         Inventory::create([
-            'product_id' => 2,
-            'movement_type' => 'salida',
+            'product_id' => 1,
+            'movement_type' => 'Salida',
             'movement_date' => now(),
+            'quantity' => 1,
             // Otros campos según sea necesario
         ]);
 

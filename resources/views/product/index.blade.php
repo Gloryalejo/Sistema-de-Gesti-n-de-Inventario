@@ -21,6 +21,7 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Name</th>
+                                <th>Quantity</th>
                                 <th>Description</th>
                                 <th>Base Price</th>
                                 <th>Base Cost</th>
@@ -35,6 +36,7 @@
                                     <tr>
                                         <td>{{ $product->id }}</td>
                                         <td>{{ $product->name }}</td>
+                                        <td>{{ $product->quantity() }}</td>
                                         <td>{{ $product->description }}</td>
                                         <td>{{ $product->base_price }}</td>
                                         <td>{{ $product->base_cost }}</td>

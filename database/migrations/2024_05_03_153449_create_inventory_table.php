@@ -16,6 +16,7 @@ class CreateInventoryTable extends Migration
             $table->unsignedBigInteger('product_id');
             $table->string('movement_type'); // Tipo de movimiento (Entrada o Salida)
             $table->date('movement_date'); // Fecha del movimiento
+            $table->unsignedBigInteger('quantity');
             $table->timestamps();
 
             // Definir la relación con la tabla de productos

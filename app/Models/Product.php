@@ -17,33 +17,49 @@ class Product extends Model
     protected $dates = ['deleted_at'];
 
 
-    protected static function boot()
-    {
-        parent::boot();
+    // protected static function boot()
+    // {
+    //     parent::boot();
 
-        static::created(function ($product) {
-            // Crear un registro de inventario al crear un nuevo producto
-            Inventory::create([
-                'product_id' => $product->id,
-                'movement_type' => 'Entrada', // Por ejemplo, asume una entrada al crear un producto
-                'movement_date' => now(),
-            ]);
-        });
+    //     static::created(function ($product) {
+    //         // Crear un registro de inventario al crear un nuevo producto
+    //         Inventory::create([
+    //             'product_id' => $product->id,
+    //             'movement_type' => 'Entrada', // Por ejemplo, asume una entrada al crear un producto
+    //             'movement_date' => now(),
+    //         ]);
+    //     });
 
-        // Evento al eliminar un producto
-        static::deleted(function ($product) {
-            // Registrar una salida de inventario
-            Inventory::create([
-                'product_id' => $product->id,
-                'movement_type' => 'Salida',
-                'movement_date' => now(),
-            ]);
-        });
-    }
+    //     // Evento al eliminar un producto
+    //     static::deleted(function ($product) {
+    //         // Registrar una salida de inventario
+    //         Inventory::create([
+    //             'product_id' => $product->id,
+    //             'movement_type' => 'Salida',
+    //             'movement_date' => now(),
+    //         ]);
+    //     });
+    // }
 
     public function inventory()
     {
         return $this->hasMany(Inventory::class, 'product_id', 'id');
+    }
+
+    public function quantity()
+    {
+        $quantity = 0;
+        $entries = Inventory::where('product_id', $this->id)->get();
+        //$entries = $this->inventory();
+        foreach ($entries as $entry) {
+            if ($entry->movement_type === 'Entrada') {
+                $quantity += $entry->quantity;
+            }
+            if ($entry->movement_type === 'Salida') {
+                $quantity -= $entry->quantity;
+            }
+        }
+        return $quantity;
     }
 
     /**

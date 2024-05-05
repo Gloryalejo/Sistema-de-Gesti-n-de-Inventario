@@ -49,6 +49,8 @@ Route::get('/products/{id}/edit', [App\Http\Controllers\ProductController::class
 Route::put('/products/{id}/edit', [App\Http\Controllers\ProductController::class, 'update'])->middleware(['auth:sanctum', 'ability:check-status,place-orders']);
 Route::get('/products/{id}/delete', [App\Http\Controllers\ProductController::class, 'destroy'])->middleware(['auth:sanctum', 'ability:check-status,place-orders']);
 
+// ruta de productos sin proteger
+
 // Route::get('products', [App\Http\Controllers\ProductController::class, 'index']);
 // Route::get('/products/create', [App\Http\Controllers\ProductController::class, 'create']);
 // Route::post('/products/create', [App\Http\Controllers\ProductController::class, 'store']);
@@ -76,8 +78,10 @@ Route::get('functions', [App\Http\Controllers\FunctionsController::class, 'index
 
 
 Route::get('inventory', [App\Http\Controllers\InventoryController::class, 'index'])->middleware(['auth:sanctum', 'ability:check-status,place-orders']);
-Route::get('/inventory/out', [App\Http\Controllers\InventoryController::class, 'createOut'])->middleware(['auth:sanctum', 'ability:check-status,place-orders']);
-
+Route::get('/inventory/in', [App\Http\Controllers\InventoryController::class, 'in'])->middleware(['auth:sanctum', 'ability:check-status,place-orders']);
+Route::post('/inventory/in', [App\Http\Controllers\InventoryController::class, 'storeIn'])->middleware(['auth:sanctum', 'ability:check-status,place-orders']);
+Route::get('/inventory/out', [App\Http\Controllers\InventoryController::class, 'out'])->middleware(['auth:sanctum', 'ability:check-status,place-orders']);
+Route::post('/inventory/out', [App\Http\Controllers\InventoryController::class, 'storeOut'])->middleware(['auth:sanctum', 'ability:check-status,place-orders']);
 
 Route::get('permissions', [App\Http\Controllers\PermissionsController::class, 'index'])->middleware(['auth:sanctum', 'ability:check-status,place-orders']);
 

@@ -3,16 +3,13 @@
 @section('content')
     <h1>Registrar Salida de Inventario</h1>
 
-    <form method="POST" action="{{ route('inventory.storeOut') }}">
+    <form method="POST" action="{{ url('inventory/out') }}">
         @csrf
 
         <div class="form-group">
-            <label for="product_id">Producto:</label>
-            <select name="product_id" id="product_id" class="form-control">
-                @foreach($products as $product)
-                    <option value="{{ $product->id }}">{{ $product->name }}</option>
-                @endforeach
-            </select>
+            <label for="product_id">Product ID:</label>
+            <input type="number" name="product_id" id="product_id" class="form-control">
+
         </div>
 
         <div class="form-group">
