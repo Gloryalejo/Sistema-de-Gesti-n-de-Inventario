@@ -3,11 +3,6 @@
 <!-- index.blade.php -->
 @extends('layouts.app')
 
-@section('navbar')
-    <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-    </nav>
-@endsection
-
 @section('content')
     <div class="container">
         <div class="py-5">
