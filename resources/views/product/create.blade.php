@@ -16,7 +16,6 @@
                     </div>
             @endif
 
-
             <div class="card">
                 <div class="card-heeader">
                     <h4>Add Product
@@ -24,9 +23,8 @@
                     </h4>
                 </div>
                 <div class="card-body">
-                    <form action="{{ url('/products') }}" method="POST">
-                        @csrf
-
+                    <form action="{{ url('products/create') }}" method="POST">
+                        @csrf 
                     <div class="mb-3">
                         <label>Name</label>
                         <input type="text" name="name" value="{{ old('name') }}">
@@ -72,6 +70,16 @@
                         <label>Category ID</label>
                         <input type="number" name="category_id" value="{{ old('category_id') }}">
                         @error('category_id')
+                        <span class="text-danger">
+                                    {{$message}}
+                        </span>
+                        @enderror
+                    </div>
+
+                    <div class="mb-3">
+                        <label>Supplier IDs</label>
+                        <input type="text" name="supplier_id" value="{{ old('supplier_id') }}">
+                        @error('supplier_id')
                         <span class="text-danger">
                                     {{$message}}
                         </span>

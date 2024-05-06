@@ -20,6 +20,7 @@ class ProductSeeder extends Seeder
         $product->description = 'Televisión inteligente con resolución 4K.';
         $product->base_price = 17999.00;
         $product->base_cost =12000.00;
+        // $product->supplier_id =1;
 
         $product->save();
     
@@ -37,6 +38,7 @@ class ProductSeeder extends Seeder
         $product1->description = 'Laptop de alto rendimiento con pantalla 4K.';
         $product1->base_price = 34999.00;
         $product1->base_cost = 25000.00;
+        // $product1->supplier_id =1;
         $product1->save();
 
 
@@ -58,6 +60,7 @@ class ProductSeeder extends Seeder
         $product2->description = 'Camiseta deportiva con tecnología de secado rápido.';
         $product2->base_price = 699.00;
         $product2->base_cost = 300.00;
+        // $product2->supplier_id =1;
         $product2->save();
 
         // Product::create([
@@ -74,6 +77,7 @@ class ProductSeeder extends Seeder
         $product3->description = 'Jeans clásicos de la marca Levi´s.';
         $product3->base_price = 1499.00;
         $product3->base_cost = 800.00;
+        // $product3->supplier_id =2;
         $product3->save();
 
 
@@ -93,6 +97,7 @@ class ProductSeeder extends Seeder
         $product4->description = 'Sábanas suaves y confortables de algodón.';
         $product4->base_price = 999.00;
         $product4->base_cost = 500.00;
+        // $product4->supplier_id =2;
         $product4->save();
 
 
@@ -110,6 +115,7 @@ class ProductSeeder extends Seeder
         $product5->description = 'Silla de oficina con diseño ergonómico.';
         $product5->base_price = 4499.00;
         $product5->base_cost = 2800.00;
+        // $product5->supplier_id =1;
         $product5->save();
 
 
@@ -128,6 +134,7 @@ class ProductSeeder extends Seeder
         $product6->description = 'Licuadora de alta potencia marca Oster.';
         $product6->base_price = 1199.00;
         $product6->base_cost = 600.00;
+        // $product6->supplier_id =2;
         $product6->save();
 
         // // Productos de la categoría Cocina
@@ -145,6 +152,7 @@ class ProductSeeder extends Seeder
         $product7->description = 'Cafetera de cápsulas para café espresso.';
         $product7->base_price = 3999.00;
         $product7->base_cost = 2800.00;
+        // $product7->supplier_id =1;
         $product7->save();
 
 
@@ -165,6 +173,7 @@ class ProductSeeder extends Seeder
         $product8->description = 'Balón de fútbol de alta calidad marca Adidas.';
         $product8->base_price = 599.00;
         $product8->base_cost = 250.00;
+        // $product8->supplier_id =2;
         $product8->save();
         
         // Product::create([
@@ -182,6 +191,7 @@ class ProductSeeder extends Seeder
         $product9->description = 'Pesas para ejercicio ajustables en peso.';
         $product9->base_price = 1799.00;
         $product9->base_cost = 1000.00;
+        // $product9->supplier_id =2;
         $product9->save();
     
         // Product::create([
@@ -200,6 +210,7 @@ class ProductSeeder extends Seeder
         $product10->description = 'Secadora de cabello de alta potencia marca Remington.';
         $product10->base_price = 899.00;
         $product10->base_cost = 500.00;
+        // $product10->supplier_id =1;
         $product10->save();
 
         // Product::create([
@@ -216,6 +227,7 @@ class ProductSeeder extends Seeder
         $product11->description = 'Kit de maquillaje con variedad de productos profesionales.';
         $product11->base_price = 2499.00;
         $product11->base_cost = 1200.00;
+        //$product11->supplier_id =1;
         $product11->save();
     
         // Product::create([
@@ -234,6 +246,7 @@ class ProductSeeder extends Seeder
         $product12->description = 'Laptop versátil para uso diario marca HP.';
         $product12->base_price = 14999.00;
         $product12->base_cost = 10000.00;
+        // $product12->supplier_id =2;
         $product12->save();
 
         // Product::create([
@@ -250,6 +263,7 @@ class ProductSeeder extends Seeder
         $product13->description = 'Teléfono inteligente con excelente relación calidad-precio.';
         $product13->base_price = 8999.00;
         $product13->base_cost = 6000.00;
+        // $product13->supplier_id =2;
         $product13->save();
 
         
@@ -269,6 +283,7 @@ class ProductSeeder extends Seeder
         $product14->description = 'Libro clásico de literatura infantil.';
         $product14->base_price = 249.00;
         $product14->base_cost = 100.00;
+        // $product14->supplier_id =1;
         $product14->save();
 
         // Product::create([

@@ -19,6 +19,6 @@ use App\Http\Controllers\UsersController;
 //     return $request->user();
 // });
 
-Route::get('/products', [ProductController::class])->middleware('auth:sanctum');
+//Route::get('/products', [ProductController::class])->middleware('auth:sanctum');
 Route::post('/auth/register', [UsersController::class, 'createUser']);
 Route::post('/auth/login', [UsersController::class, 'loginUser']);

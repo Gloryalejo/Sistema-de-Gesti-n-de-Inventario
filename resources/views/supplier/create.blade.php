@@ -17,13 +17,13 @@
 
 
             <div class="card">
-                <div class="card-heeader">
+                <div class="card-header">
                     <h4>Add Supplier
                         <a href="{{ url('suppliers') }}" class="btn btn-primary float-end">Back</a>
                     </h4>
                 </div>
                 <div class="card-body">
-                    <form action="{{ url('/suppliers') }}" method="POST">
+                    <form action="{{ url('suppliers/create') }}" method="POST">
                         @csrf
 
                     <div class="mb-3">
