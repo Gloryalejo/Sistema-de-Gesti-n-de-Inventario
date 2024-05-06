@@ -59,6 +59,11 @@ class UsersController extends Controller
         //
     }
 
+    public function create()
+    {
+        return view('user.create');
+    }
+
     /**
      * Show the form for editing the specified resource.
      */
