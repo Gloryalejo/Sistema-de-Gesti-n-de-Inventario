@@ -4,6 +4,28 @@
 <div class="container mt-3">
     <h1 class="text-center">Registrar Salida de Inventario</h1>
 
+    @if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
+
+    @if(session('warning'))
+        <div class="alert alert-warning">
+            {{ session('warning') }}
+        </div>
+    @endif
+
+    @if($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
     <form method="POST" action="{{ url('inventory/out') }}">
         @csrf
 
@@ -25,6 +47,7 @@
 
         <div class="text-center">
         <button type="submit" class="btn btn-primary">Registrar Salida</button>
+        <a href="{{ url('inventory') }}" class="btn btn-secondary">Regresar</a>
         </div>
     </form>
 </div>

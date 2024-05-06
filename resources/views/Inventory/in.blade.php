@@ -24,6 +24,7 @@
 
             <div class="text-center">
                 <button type="submit" class="btn btn-primary">Registrar Entrada</button>
+                <a href="{{ url('inventory') }}" class="btn btn-secondary">Regresar</a>
             </div>
         </form>
     </div>
