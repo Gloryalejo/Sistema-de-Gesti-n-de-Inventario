@@ -19,12 +19,16 @@ class InventoryController extends Controller
     // Método para mostrar el formulario de salida
     public function out()
     {
-        return view('inventory.out');
+        $products = Product::orderBy('id','asc')->paginate(20);
+
+        return view('inventory.out', compact('products'));
     }
 
     public function in()
     {
-        return view('inventory.in');
+        $products = Product::orderBy('id','asc')->paginate(20);
+
+        return view('inventory.in', compact('products'));
     }
 
     // Método para procesar el formulario de salida
@@ -32,31 +36,36 @@ class InventoryController extends Controller
     {
         // Validar los datos del formulario
         $request->validate([
-            'product_id' => 'required|exists:products,id',
-            'quantity' => 'required|integer|min:1',
+            //'product_id' => 'required|exists:products,id',
+            //'quantity' => 'required|integer|min:1',
             'movement_date' => 'required|date',
             // Puedes agregar más reglas de validación según tus necesidades
         ]);
 
-        // Obtener el producto
-        $product = Product::findOrFail($request->product_id); // Corregir la importación de Product
+        foreach ($request->input() as $key => $value) {
+            if (str_contains($key, "qty") && $value > 0) {
+                $parameterSplit = explode('-', $key);
+                $productId = $parameterSplit[2];
 
-        // Verificar si hay suficiente cantidad disponible para la salida
-        if ($product->quantity() < $request->quantity) {
-            return back()->withInput()->withErrors(['quantity' => 'La cantidad solicitada supera la cantidad disponible']);
+                // Obtener el producto
+                $product = Product::findOrFail($productId); // Corregir la importación de Product
+
+                // Verificar si hay suficiente cantidad disponible para la salida
+                if ($product->quantity() < $value) {
+                    return back()->withInput()->withErrors(['quantity' => 'La cantidad solicitada supera la cantidad disponible']);
+                }
+
+                // Crear un nuevo registro de salida en el inventario
+                Inventory::create([
+                    'product_id' => $product->id,
+                    'quantity' => $value,
+                    'movement_date' => $request->movement_date,
+                    'movement_type' => 'Salida', 
+                ]);
+
+                //$product->save();
+            }
         }
-
-        // Crear un nuevo registro de salida en el inventario
-        Inventory::create([
-            'product_id' => $product->id,
-            'quantity' => $request->quantity,
-            'movement_date' => $request->movement_date,
-            'movement_type' => 'Salida', 
-        ]);
-
-        // Actualizar la cantidad disponible del producto
-        //$product->quantity -= $request->quantity;
-        $product->save();
 
         // Redirigir a la página de inventario con un mensaje de éxito
         return redirect()->action([InventoryController::class, 'index'])->with('success', 'Salida de inventario registrada exitosamente');
@@ -67,23 +76,30 @@ class InventoryController extends Controller
     {
         // Validar los datos del formulario
         $request->validate([
-            'product_id' => 'required|exists:products,id',
-            'quantity' => 'required|integer|min:1',
+            //'product_id' => 'required|exists:products,id',
+            //'quantity' => 'required|integer|min:1',
             'movement_date' => 'required|date',
             // Puedes agregar más reglas de validación según tus necesidades
         ]);
 
-        // Obtener el producto
-        $product = Product::findOrFail($request->product_id); // Corregir la importación de Product
+        foreach ($request->input() as $key => $value) {
+            if (str_contains($key, "qty") && $value > 0) {
+                $parameterSplit = explode('-', $key);
+                $productId = $parameterSplit[2];
 
-        // Crear un nuevo registro de salida en el inventario
-        Inventory::create([
-            'product_id' => $product->id,
-            'quantity' => $request->quantity,
-            'movement_date' => $request->movement_date,
-            'movement_type' => 'Entrada', 
-        ]);
-        $product->save();
+                // Obtener el producto
+                $product = Product::findOrFail($productId); // Corregir la importación de Product
+
+                // Crear un nuevo registro de salida en el inventario
+                Inventory::create([
+                    'product_id' => $product->id,
+                    'quantity' => $value,
+                    'movement_date' => $request->movement_date,
+                    'movement_type' => 'Entrada', 
+                ]);
+                //$product->save();
+            }
+        }
 
         // Redirigir a la página de inventario con un mensaje de éxito
         return redirect()->action([InventoryController::class, 'index'])->with('success', 'Entrada de inventario registrada exitosamente');

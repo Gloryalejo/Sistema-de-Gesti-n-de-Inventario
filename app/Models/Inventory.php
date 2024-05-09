@@ -51,4 +51,26 @@ class Inventory extends Model
         //error_log($this->id . "--->>>>-" . $quantity);
         return $quantity;
     }
+
+    public function previousQuantity()
+    {
+        $quantity = 0;
+        $entries = Inventory::where('product_id', $this->product_id)
+                     ->where('id', '<', $this->id)->get();
+                    //->where('created_at', '<=', $this->created_at);
+                   // ->whereTime('created_at', '<=', $this->created_at);
+        //error_log($this->id . "----" . $entries->count());
+        foreach ($entries as $entry) {
+            //error_log("hola");
+            //error_log($this->id . "---*****-" . $entry->quantity);
+            if ($entry->movement_type === 'Entrada') {
+                $quantity += $entry->quantity;
+            }
+            if ($entry->movement_type === 'Salida') {
+                $quantity -= $entry->quantity;
+            }
+        }
+        //error_log($this->id . "--->>>>-" . $quantity);
+        return $quantity;
+    }
 }

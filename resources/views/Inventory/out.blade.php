@@ -30,6 +30,14 @@
         @csrf
 
         <div class="form-group">
+            @foreach ($products as $product)
+                <input type="checkbox" id="{{ "producto-" . $product->id }}" name="{{ "producto-" . $product->id }}" value="{{ $product->id }}" class="form-control">
+                <label for="{{ "producto" . $product->id }}">{{ $product->id . " -- " . $product->name . " -- " . $product->description }}</label>
+                <input style="float: right; clear: both;" type="number" id="{{ "producto-qty-" . $product->id }}" name="{{ "producto-qty-" . $product->id }}" maxlength="5" size="5" placeholder="0">
+            @endforeach
+        </div>
+
+        {{-- <div class="form-group">
             <label for="product_id">Product ID:</label>
             <input type="number" name="product_id" id="product_id" class="form-control">
 
@@ -38,7 +46,7 @@
         <div class="form-group">
             <label for="quantity">Cantidad:</label>
             <input type="number" name="quantity" id="quantity" class="form-control">
-        </div>
+        </div> --}}
 
         <div class="form-group">
             <label for="movement_date">Fecha:</label>

@@ -15,7 +15,8 @@
                         <th>ID</th>
                         <th>Product ID</th>
                         <th>Producto</th>
-                        <th>Cantidad de Producto</th>
+                        <th>Cantidad Anterior</th>
+                        <th>Cantidad Actual</th>
                         <th>Cantidad del Movimiento</th>
                         <th>Tipo de Movimiento</th>
                         <th>Fecha del Movimiento</th>
@@ -26,7 +27,8 @@
                         <tr>
                             <td>{{ $record->id }}</td>
                             <td>{{ $record->product_id }}</td>
-                            <td>{{ $record->product ? $record->product->name : ($record->product_id ? 'Producto eliminado' : 'N/A') }}</td>                         
+                            <td>{{ $record->product ? $record->product->name : ($record->product_id ? 'Producto eliminado' : 'N/A') }}</td>   
+                            <td>{{ $record->previousQuantity() }}</td>                      
                             <td>{{ $record->currentQuantity() }}</td>
                             <td>{{ $record->signedQuantity() }}</td>
                             <td>{{ $record->product ? $record->movement_type : 'Salida' }}</td>
