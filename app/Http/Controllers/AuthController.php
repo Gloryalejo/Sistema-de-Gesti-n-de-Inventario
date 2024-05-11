@@ -25,11 +25,15 @@ class AuthController extends Controller
     }
     public function redirect()
     {
+
+        
         return Socialite::driver('facebook')->redirect();
     }
 
     public function callback()
     {
-        $user = Socialite::driver('facebook')->user();
+         $user = Socialite::driver('facebook')->user();
+         dd($user);
+
     }
 }
