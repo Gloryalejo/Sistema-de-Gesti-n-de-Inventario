@@ -81,14 +81,11 @@
                                     {{ __('Register') }}
                                 </button>
                             </button>
-                            
                             <a href="{{route('auth.redirect')}}" class="btn btn-primary ml-3">
                                 Register with Facebook
                             </a>
                         </button>
-                        <a href="#" class="btn btn-primary ml-3">
-                            Register with GitHub
-                        </a>
+
                             </div>
                         </div>
                     </form>
