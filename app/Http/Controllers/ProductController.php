@@ -5,6 +5,7 @@ use App\Models\Product;
 use App\Models\ProductLog;
 use App\Models\ProductSupplier;
 use App\Models\Supplier;
+use App\Models\Category;
 
 use Illuminate\Http\Request;
 
@@ -26,8 +27,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-
-        return view('product.create');
+        $categories = Category::pluck('name', 'id');
+        return view('product.create', compact('categories'));
     }
 
     /**

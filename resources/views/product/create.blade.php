@@ -67,14 +67,17 @@
                     </div>
 
                     <div class="mb-3">
-                        <label>Category ID</label>
-                        <input type="number" name="category_id" value="{{ old('category_id') }}">
+                        <label>Category</label>
+                        <select name="category_id">
+                            @foreach($categories as $id => $name)
+                                <option value="{{ $id }}" @if(old('category_id') == $id) selected @endif>{{ $name }}</option>
+                            @endforeach
+                        </select>
                         @error('category_id')
-                        <span class="text-danger">
-                                    {{$message}}
-                        </span>
+                        <span class="text-danger">{{ $message }}</span>
                         @enderror
                     </div>
+                    
 
                     <div class="mb-3">
                         <label>Supplier IDs</label>
