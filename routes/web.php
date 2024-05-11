@@ -13,6 +13,8 @@ use App\Http\Controllers\UsersController;
 use App\Http\Controllers\ProductLogController;
 use App\Http\Controllers\InventoryController;
 use Illuminate\Http\Request;
+use Laravel\Socialite\Facades\Socialite;
+use App\Http\Controllers\AuthController;
 
 
 /*
@@ -107,6 +109,13 @@ Route::get('/suppliers/{id}/delete', [App\Http\Controllers\SuppliersController::
 // Route::get('/inventory/out', [InventoryController::class, 'createOut']);
 
 
+ 
+Route::get('/auth/redirect', [AuthController::class, 'redirect'])
+    ->name('auth.redirect');
+
+Route::get('/auth/callback', [AuthController::class,'callback'])
+    ->name('auth.callback');
+ 
 
 
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use Laravel\Socialite\Facades\Socialite;
 
 class AuthController extends Controller
 {
@@ -21,5 +22,14 @@ class AuthController extends Controller
         }
 
         return $this->formatResponse('Authenticated', ['token' => $user->encodeToken()]);
+    }
+    public function redirect()
+    {
+        return Socialite::driver('facebook')->redirect();
+    }
+
+    public function callback()
+    {
+        $user = Socialite::driver('facebook')->user();
     }
 }
