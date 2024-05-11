@@ -33,7 +33,16 @@ class AuthController extends Controller
     public function callback()
     {
          $user = Socialite::driver('facebook')->user();
-         dd($user);
+         
+         
+         $user = User::create([
+            'name' => $user->getName(),
+            'email'=> $user->getEmail(),
+         ]);
+
+         auth()->login($user);
+
+         return redirect()->to('/home');
 
     }
 }
