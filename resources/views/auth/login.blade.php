@@ -56,6 +56,11 @@
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Login') }}
                                 </button>
+                                <a href="{{route('auth.redirect')}}" class="btn btn-primary ml-3">
+                                    Login with Facebook
+                                </a>
+                            </button>
+                                
 
                                 @if (Route::has('password.request'))
                                     <a class="btn btn-link" href="{{ route('password.request') }}">

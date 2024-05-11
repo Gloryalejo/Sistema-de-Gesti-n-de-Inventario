@@ -35,10 +35,14 @@ class AuthController extends Controller
          $user = Socialite::driver('facebook')->user();
          
          
-         $user = User::create([
+
+        $user = User::firstOrCreate([
+            'email' => $user->getEmail(),
+
+        ],[
             'name' => $user->getName(),
-            'email'=> $user->getEmail(),
-         ]);
+
+        ]);
 
          auth()->login($user);
 
