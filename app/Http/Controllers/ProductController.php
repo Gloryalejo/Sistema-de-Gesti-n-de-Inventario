@@ -103,11 +103,21 @@ class ProductController extends Controller
         'base_price' => 'required',
         'base_cost' => 'required',
         'category_id' => 'required',
-        'supplier_id' => 'required'
+        'supplier_id' => 'required',
+        'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048'
     ]);
 
     // Encuentra el producto antes de la actualización
     $product = Product::findOrFail($id);
+
+    if ($request->hasFile('image')) {
+        $image = $request->file('image');
+        if ($image->isValid()) {
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('images/products'), $imageName);
+            $product->image = $imageName;
+        }
+    }
 
     // Captura los valores antes de la actualización
     $beforeUpdateValues = $product->getAttributes();

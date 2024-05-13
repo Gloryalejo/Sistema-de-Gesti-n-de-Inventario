@@ -21,6 +21,7 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Name</th>
+                                <th>Image</th>
                                 <th>Quantity</th>
                                 <th>Description</th>
                                 <th>Base Price</th>
@@ -36,6 +37,13 @@
                                     <tr>
                                         <td>{{ $product->id }}</td>
                                         <td>{{ $product->name }}</td>
+                                        <td>
+                                        @if ($product->image)
+                                                <img src="{{ asset('images/products/' . $product->image) }}" alt="{{ $product->name }}" width="120">
+                                            @else
+                                                No Image
+                                            @endif
+                                        </td>
                                         <td>{{ $product->quantity() }}</td>
                                         <td>{{ $product->description }}</td>
                                         <td>{{ $product->base_price }}</td>
