@@ -13,19 +13,27 @@
                     <th>Action</th>
                     <th>Details</th>
                     <th>Product Name</th>
+                    <th>Imagen</th>
                     <th>Date</th>
                 </tr>
             </thead>
             <tbody>
-            @foreach ($logs as $log)
-    <tr>
-        <td>{{ $log->id }}</td>
-        <td>{{ ucfirst($log->action) }}</td>
-        <td>{{ $log->details }}</td>
-        <td>{{ $log->product->name }}</td>
-        <td>{{ $log->created_at->format('Y-m-d H:i:s') }}</td>
-    </tr>
-            @endforeach
+                @foreach ($logs as $log)
+                    <tr>
+                        <td>{{ $log->id }}</td>
+                        <td>{{ ucfirst($log->action) }}</td>
+                        <td>{{ $log->details }}</td>
+                        <td>{{ $log->product->name }}</td>
+                        <td>
+                            @if ($log->product->image)
+                                <img src="{{ asset('images/products/' . $log->product->image) }}" alt="Product Image" width="100">
+                            @else
+                                                        
+                            @endif
+                        </td>
+                        <td>{{ $log->created_at->format('Y-m-d H:i:s') }}</td>
+                    </tr>
+                @endforeach
             </tbody>
         </table>
 

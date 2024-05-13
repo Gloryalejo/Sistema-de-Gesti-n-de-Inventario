@@ -15,6 +15,7 @@
                         <th>ID</th>
                         <th>Product ID</th>
                         <th>Producto</th>
+                        <th>Imagen</th>
                         <th>Cantidad Anterior</th>
                         <th>Cantidad Actual</th>
                         <th>Cantidad del Movimiento</th>
@@ -28,6 +29,13 @@
                             <td>{{ $record->id }}</td>
                             <td>{{ $record->product_id }}</td>
                             <td>{{ $record->product ? $record->product->name : ($record->product_id ? 'Producto eliminado' : 'N/A') }}</td>   
+                            <td>
+                                @if ($record->product && $record->product->image)
+                                    <img src="{{ asset('images/products/' . $record->product->image) }}" alt="{{ $record->product->name }}" width="50">
+                                @else
+                                            
+                                @endif
+                            </td>
                             <td>{{ $record->previousQuantity() }}</td>                      
                             <td>{{ $record->currentQuantity() }}</td>
                             <td>{{ $record->signedQuantity() }}</td>
