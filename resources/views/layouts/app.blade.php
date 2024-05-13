@@ -20,6 +20,7 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
+                
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('ffsdasd', 'Laravel') }}
                 </a>
@@ -52,17 +53,19 @@
                         </li>
 
                         <li class="nav-item">
-                             <a class="nav-link" href="{{ url('users') }}">{{ __('Users') }}</a>
-                        </li>
-
-                        <li class="nav-item">
                             <a class="nav-link" href="{{ url('inventory') }}">{{ __('Inventory') }}</a>
                        </li>
                     @endif
-                    
-                        
                     </ul>
                     
+                    <!-- Interruptor de modo oscuro -->
+                  
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="darkModeToggle">
+                        <label class="form-check-label" for="darkModeToggle">Modo Oscuro</label>
+                    </div>
+                    
+                             
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
@@ -109,5 +112,6 @@
             @yield('content')
         </main>
     </div>
+    
 </body>
 </html>
