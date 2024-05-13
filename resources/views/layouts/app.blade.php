@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('hola', 'Laravel') }}</title>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
@@ -16,9 +16,18 @@
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
-<body>
+<body data-bs-theme="dark">
+    <div class="form-check form-switch mx-4">
+        <input
+          class="form-check-input p-2"
+          type="checkbox"
+          role="switch"
+          id="flexSwitchCheckChecked"
+          checked
+          onclick="myFunction()"
+        />
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar" navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('ffsdasd', 'Laravel') }}
@@ -104,6 +113,14 @@
                 </div>
             </div>
         </nav>
+
+        <script>
+            function myFunction() {
+              var element = document.body;
+              element.dataset.bsTheme =
+                element.dataset.bsTheme == "light" ? "dark" : "light";
+            }
+            </script>
 
         <main class="py-4">
             @yield('content')
