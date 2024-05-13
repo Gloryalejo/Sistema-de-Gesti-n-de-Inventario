@@ -41,7 +41,7 @@
                                         @if ($product->image)
                                                 <img src="{{ asset('images/products/' . $product->image) }}" alt="{{ $product->name }}" width="120">
                                             @else
-                                                No Image
+                                                    
                                             @endif
                                         </td>
                                         <td>{{ $product->quantity() }}</td>

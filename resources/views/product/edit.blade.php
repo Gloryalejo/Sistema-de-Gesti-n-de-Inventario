@@ -9,6 +9,12 @@
     <div class="row">
         <div class="col-md-12">
 
+        @if (session('status'))
+                <div class="alert alert-success">
+                    {{ session('status') }}
+                </div>
+            @endif
+
             <div class="card">
                 <div class="card-header">
                     <h4>Edit Product
@@ -21,11 +27,24 @@
                         @method('PUT')
 
                         <div class="mb-3">
-                            <label for="image">Image</label>
-                            <input type="file" name="image" id="image" onchange="previewImage(event)">
-                            <br>
-                            <img id="imagePreview" src="" alt="Image Preview" width="150" style="display: none; margin-left: 40px;">
-                        </div>
+        <label for="image">Image</label>
+        <input type="file" name="image" id="image" onchange="previewImage(event)">
+        <br>
+        <div id="imagePreviewContainer">
+            @if ($products->image)
+                <img id="imagePreview" src="{{ asset('images/products/' . $products->image) }}" alt="Product Image" width="150" style="margin-left: 40px;">
+                <button type="button" id="deleteImageButton" class="btn btn-link text-danger" onclick="deleteImage()">Delete Image</button>
+            @else
+                <img id="imagePreview" src="" alt="Image Preview" width="150" style="display: none;">
+            @endif
+        </div>
+    </div>
+
+    <!-- Campo oculto para indicar eliminación de imagen -->
+    @if ($products->image)
+        <input type="hidden" name="delete_image" id="delete_image" value="1">
+    @endif
+
 
                         <div class="mb-3">
                             <label>Name</label>
@@ -86,24 +105,48 @@
 </div>
 
 <script>
-    function previewImage(event) {
-        const input = event.target;
-        const imagePreview = document.getElementById('imagePreview');
+function deleteImage() {
+    const imagePreviewContainer = document.getElementById('imagePreviewContainer');
+    const imagePreview = document.getElementById('imagePreview');
+    const deleteImageButton = document.getElementById('deleteImageButton');
 
-        if (input.files && input.files[0]) {
-            const reader = new FileReader();
+    // Eliminar la imagen
+    imagePreview.src = '';
+    imagePreview.style.display = 'none';
 
-            reader.onload = function(e) {
-                imagePreview.src = e.target.result;
-                imagePreview.style.display = 'block';
-            };
+    // Ocultar el botón "Delete Image"
+    deleteImageButton.style.display = 'none';
 
-            reader.readAsDataURL(input.files[0]);
-        } else {
-            imagePreview.src = '';
-            imagePreview.style.display = 'none';
-        }
+    // Limpiar la selección de archivo
+    document.getElementById('image').value = '';
+}
+
+function previewImage(event) {
+    const input = event.target;
+    const imagePreview = document.getElementById('imagePreview');
+    const deleteImageButton = document.getElementById('deleteImageButton');
+
+    if (input.files && input.files[0]) {
+        const reader = new FileReader();
+
+        reader.onload = function(e) {
+            imagePreview.src = e.target.result;
+            imagePreview.style.display = 'block';
+
+            // Mostrar el botón "Delete Image"
+            deleteImageButton.style.display = 'block';
+        };
+
+        reader.readAsDataURL(input.files[0]);
+    } else {
+        imagePreview.src = '';
+        imagePreview.style.display = 'none';
+
+        // Ocultar el botón "Delete Image" si no se selecciona ninguna imagen
+        deleteImageButton.style.display = 'none';
     }
+}
 </script>
+
 
 @endsection

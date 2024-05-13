@@ -8,6 +8,7 @@ use App\Models\Supplier;
 use App\Models\Category;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -44,6 +45,7 @@ class ProductController extends Controller
             'base_cost' => 'required',
             'category_id' => 'required|exists:categories,id',
             'supplier_id' => 'required',
+            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         $product = Product::create([
@@ -54,6 +56,16 @@ class ProductController extends Controller
             'category_id' => $request->category_id,
             // 'supplier_id' => $request->supplier_id,
         ]);
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            if ($image->isValid()) {
+                $imageName = time() . '.' . $image->getClientOriginalExtension();
+                $image->move(public_path('images/products'), $imageName);
+                $product->image = $imageName;
+                $product->save();
+            }
+        }
 
         $suppliers = $request->supplier_id;
         $supplierArray = explode(',', $suppliers);
@@ -109,6 +121,17 @@ class ProductController extends Controller
 
     // Encuentra el producto antes de la actualización
     $product = Product::findOrFail($id);
+
+        // Verificar si se solicitó eliminar la imagen
+    if ($request->has('delete_image')) {
+        // Eliminar físicamente la imagen almacenada en el sistema de archivos
+        if ($product->image && Storage::disk('public')->exists('images/products/' . $product->image)) {
+            Storage::disk('public')->delete('images/products/' . $product->image);
+        }
+
+        // Limpiar el nombre de la imagen en la base de datos
+        $product->image = null;
+    }
 
     if ($request->hasFile('image')) {
         $image = $request->file('image');

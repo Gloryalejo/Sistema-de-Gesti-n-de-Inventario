@@ -12,6 +12,11 @@
                     <input type="checkbox" id="{{ "producto-" . $product->id }}" name="{{ "producto-" . $product->id }}" value="{{ $product->id }}" class="form-control">
                     <label for="{{ "producto" . $product->id }}">{{ $product->id . " -- " . $product->name . " -- " . $product->description }}</label>
                     <input style="float: right; clear: both;" type="number" id="{{ "producto-qty-" . $product->id }}" name="{{ "producto-qty-" . $product->id }}" maxlength="5" size="5" placeholder="0">
+                @if ($product->image)
+                    <img src="{{ asset('images/products/' . $product->image) }}" alt="{{ $product->name }}" width="120">
+                @else
+                        
+                @endif
                 @endforeach
             </div>
 
